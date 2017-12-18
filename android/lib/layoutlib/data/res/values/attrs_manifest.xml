@@ -242,13 +242,9 @@
         <!-- Additional flag from base permission type: this permission can be automatically
             granted to the setup wizard app -->
         <flag name="setup" value="0x800" />
-        <!-- Additional flag from base permission type: this permission can be granted to instant
+        <!-- Additional flag from base permission type: this permission can be granted to ephemeral
              apps -->
-        <flag name="instant" value="0x1000" />
-        <!-- Additional flag from base permission type: this permission can only be granted to apps
-             that target runtime permissions ({@link android.os.Build.VERSION_CODES#M} and above)
-             -->
-        <flag name="runtime" value="0x2000" />
+        <flag name="ephemeral" value="0x1000" />
     </attr>
 
     <!-- Flags indicating more context for a permission group. -->
@@ -321,10 +317,6 @@
          not normally be used by applications; it requires that the system keep
          your application running at all times. -->
     <attr name="persistent" format="boolean" />
-
-    <!-- If set, the "persistent" attribute will only be honored if the feature
-         specified here is present on the device. -->
-    <attr name="persistentWhenFeatureAvailable" format="string" />
 
     <!-- Flag to specify if this application needs to be present for all users. Only pre-installed
          applications can request this feature. Default value is false. -->
@@ -561,35 +553,6 @@
          to be set for all windows of this activity -->
     <attr name="showForAllUsers" format="boolean" />
 
-    <!-- Specifies whether an {@link android.app.Activity} should be shown on top of the the lock screen
-         whenever the lockscreen is up and the activity is resumed. Normally an activity will be
-         transitioned to the stopped state if it is started while the lockscreen is up, but with
-         this flag set the activity will remain in the resumed state visible on-top of the lock
-         screen.
-
-         <p>This should be used instead of {@link android.view.WindowManager.LayoutParams#FLAG_SHOW_WHEN_LOCKED}
-         flag set for Windows. When using the Window flag during activity startup, there may not be
-         time to add it before the system stops your activity for being behind the lock-screen.
-         This leads to a double life-cycle as it is then restarted.</p> -->
-    <attr name="showWhenLocked" format="boolean" />
-
-    <!-- Specifies whether the screen should be turned on when the {@link android.app.Activity} is resumed.
-         Normally an activity will be transitioned to the stopped state if it is started while the
-         screen if off, but with this flag set the activity will cause the screen to turn on if the
-         activity will be visible and resumed due to the screen coming on. The screen will not be
-         turned on if the activity won't be visible after the screen is turned on. This flag is
-         normally used in conjunction with the {@link android.R.attr#showWhenLocked} flag to make
-         sure the activity is visible after the screen is turned on when the lockscreen is up. In
-         addition, if this flag is set and the activity calls
-         {@link android.app.KeyguardManager#requestDismissKeyguard}
-         the screen will turn on.
-
-         <p>This should be used instead of {@link android.view.WindowManager.LayoutParams#FLAG_TURN_SCREEN_ON}
-         flag set for Windows. When using the Window flag during activity startup, there may not be
-         time to add it before the system stops your activity because the screen has not yet turned
-         on. This leads to a double life-cycle as it is then restarted.</p> -->
-    <attr name="turnScreenOn" format="boolean" />
-
     <!-- Specify the authorities under which this content provider can be
          found.  Multiple authorities may be supplied by separating them
          with a semicolon.  Authority names should use a Java-style naming
@@ -813,13 +776,13 @@
         <enum name="locked" value="14" />
     </attr>
 
-    <!-- Specify the configuration changes that trigger the system to recreate the
+    <!-- Specify the configuration changes that trigger the system to restart the
          current activity if any of these configuration changes happen in the system.
          The valid configuration changes include mcc and mnc which are the same with
-         those in configChanges. By default from Android O, we don't recreate the activity
+         those in configChanges. By default from Android O, we don't restart the activity
          even the app doesn't specify mcc or mnc in configChanges. If the app wants to
-         be recreated, specify them in recreateOnConfigChanges. -->
-    <attr name="recreateOnConfigChanges">
+         restart, specify them in restartOnConfigChanges. -->
+    <attr name="restartOnConfigChanges">
         <!-- The IMSI MCC has changed, that is a SIM has been detected and
              updated the Mobile Country Code. -->
         <flag name="mcc" value="0x0001" />
@@ -846,15 +809,15 @@
     <attr name="configChanges">
         <!-- The IMSI MCC has changed, that is a SIM has been detected and
              updated the Mobile Country Code. By default from Android O, we
-             don't recreate the activity even the app doesn't specify mcc in
-             configChanges. If the app wants to recreate the activity, specify
-             mcc in recreateOnConfigChanges. -->
+             don't restart the activity even the app doesn't specify mcc in
+             configChanges. If the app wants to restart, specify mcc in
+             restartOnConfigChanges. -->
         <flag name="mcc" value="0x0001" />
         <!-- The IMSI MNC has changed, that is a SIM has been detected and
              updated the Mobile Network Code. By default from Android O, we
-             don't recreate the activity even the app doesn't specify mnc in
-             configChanges. If the app wants to recreate the acvitity, specify
-             mnc in recreateOnConfigChanges. -->
+             don't restart the activity even the app doesn't specify mnc in
+             configChanges. If the app wants to restart, specify mnc in
+             restartOnConfigChanges. -->
         <flag name="mnc" value="0x0002" />
         <!-- The locale has changed, that is the user has selected a new
              language that text should be displayed in. -->
@@ -926,7 +889,7 @@
          will run against.  If not specified, only runs in the main process of the targetPackage.
          Can either be a comma-separated list of process names or '*' for any process that
          launches to run targetPackage code. -->
-    <attr name="targetProcesses" format="string" />
+    <attr name="targetProcess" format="string" />
 
     <!-- Flag indicating that an Instrumentation class wants to take care
          of starting/stopping profiling itself, rather than relying on
@@ -1050,22 +1013,6 @@
 
          <p>The default value of this attribute is <code>false</code>. -->
     <attr name="isolatedSplits" format="boolean" />
-
-    <!-- The classname of the classloader used to load the application's classes
-         from its APK. The APK in question can either be the 'base' APK or any
-         of the application's 'split' APKs if it's using a feature split.
-
-         <p>
-         The supported values for this attribute are
-         <code>dalvik.system.PathClassLoader</code> and
-         <code>dalvik.system.DelegateLastClassLoader</code>. If unspecified,
-         the default value of this attribute is <code>dalvik.system.PathClassLoader</code>.
-
-         If an unknown classloader is provided, a PackageParserException with cause
-         <code>PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED</code> will be
-         thrown and the app will not be installed.
-         -->
-    <attr name="classLoader" format="string" />
 
     <!-- If set to <code>true</code>, indicates to the platform that this APK is
          a 'feature' split and that it implicitly depends on the base APK. This distinguishes
@@ -1407,7 +1354,6 @@
              for normal behavior. -->
         <attr name="hasCode" format="boolean" />
         <attr name="persistent" />
-        <attr name="persistentWhenFeatureAvailable" />
         <attr name="requiredForAllUsers" />
         <!-- Specify whether the components in this application are enabled or not (that is, can be
              instantiated by the system).
@@ -1500,9 +1446,6 @@
             <!-- Apps which are primarily productivity apps, such as cloud storage or workplace apps. -->
             <enum name="productivity" value="7" />
         </attr>
-
-        <!-- Declares the kind of classloader this application's classes must be loaded with -->
-        <attr name="classLoader" />
 
     </declare-styleable>
     <!-- The <code>permission</code> tag declares a security permission that can be
@@ -1779,11 +1722,6 @@
          the library at build time while it offers apps to share code defined in such
          libraries. Hence, static libraries are strictly required.
 
-         <p>On devices running O MR1 or higher, if the library is singed with multiple
-         signing certificates you must to specify the SHA-256 hashes of the additional
-         certificates via adding
-         {@link #AndroidManifestAdditionalCertificate additional-certificate} tags.
-
          <p>This appears as a child tag of the
          {@link #AndroidManifestApplication application} tag. -->
     <declare-styleable name="AndroidManifestUsesStaticLibrary" parent="AndroidManifestApplication">
@@ -1793,17 +1731,6 @@
         <attr name="version" />
         <!-- The SHA-256 digest of the library signing certificate. -->
         <attr name="certDigest" format="string" />
-    </declare-styleable>
-
-    <!-- The <code>additional-certificate</code> specifies the SHA-256 digest of a static
-         shared library's additional signing certificate. You need to use this tag if the
-         library is singed with more than one certificate.
-
-         <p>This appears as a child tag of the
-         {@link #AndroidManifestUsesStaticLibrary uses-static-library} tag. -->
-    <declare-styleable name="AndroidManifestAdditionalCertificate" parent="AndroidManifestUsesStaticLibrary">
-        <!-- The SHA-256 digest of the library signing certificate. -->
-        <attr name="certDigest" />
     </declare-styleable>
 
     <!-- The <code>supports-screens</code> specifies the screen dimensions an
@@ -2112,7 +2039,7 @@
         <attr name="launchMode" />
         <attr name="screenOrientation" />
         <attr name="configChanges" />
-        <attr name="recreateOnConfigChanges" />
+        <attr name="restartOnConfigChanges" />
         <attr name="permission" />
         <attr name="multiprocess" />
         <attr name="process" />
@@ -2157,10 +2084,6 @@
         <attr name="maxAspectRatio" />
         <attr name="lockTaskMode" />
         <attr name="showForAllUsers" />
-
-        <attr name="showWhenLocked" />
-        <attr name="turnScreenOn" />
-
         <attr name="directBootAware" />
         <!-- @hide This activity is always focusable regardless of if it is in a task/stack whose
              activities are normally not focusable.
@@ -2423,7 +2346,7 @@
             is a period then it is appended to your package name. -->
         <attr name="name" />
         <attr name="targetPackage" />
-        <attr name="targetProcesses" />
+        <attr name="targetProcess" />
         <attr name="label" />
         <attr name="icon" />
         <attr name="roundIcon" />
@@ -2507,14 +2430,6 @@
         <!-- Whether the given RRO is static or not. -->
         <attr name="isStatic" format="boolean" />
 
-        <!-- Required property name/value pair used to enable this overlay.
-             e.g. name=ro.oem.sku value=MKT210.
-             Overlay will be ignored unless system property exists and is
-             set to specified value -->
-        <!-- @hide @SystemApi This shouldn't be public. -->
-        <attr name="requiredSystemPropertyName" format="string" />
-        <!-- @hide @SystemApi This shouldn't be public. -->
-        <attr name="requiredSystemPropertyValue" format="string" />
     </declare-styleable>
 
     <!-- Declaration of an {@link android.content.Intent} object in XML.  May

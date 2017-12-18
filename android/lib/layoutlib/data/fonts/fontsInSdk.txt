@@ -12,7 +12,6 @@ NotoNaskhArabic-Bold.ttf
 NotoNaskhArabic-Regular.ttf
 NotoNaskhArabicUI-Bold.ttf
 NotoNaskhArabicUI-Regular.ttf
-NotoSansAdlam-Regular.ttf
 NotoSansArmenian-Bold.ttf
 NotoSansArmenian-Regular.ttf
 NotoSansAvestan-Regular.ttf
@@ -31,7 +30,6 @@ NotoSansCarian-Regular.ttf
 NotoSansCham-Bold.ttf
 NotoSansCham-Regular.ttf
 NotoSansCherokee-Regular.ttf
-NotoSansCJK-Regular.ttc
 NotoSansCoptic-Regular.ttf
 NotoSansCuneiform-Regular.ttf
 NotoSansCypriot-Regular.ttf
@@ -69,7 +67,8 @@ NotoSansKannadaUI-Bold.ttf
 NotoSansKannadaUI-Regular.ttf
 NotoSansKayahLi-Regular.ttf
 NotoSansKharoshthi-Regular.ttf
-NotoSansKhmer-VF.ttf
+NotoSansKhmer-Bold.ttf
+NotoSansKhmer-Regular.ttf
 NotoSansKhmerUI-Bold.ttf
 NotoSansKhmerUI-Regular.ttf
 NotoSansLao-Bold.ttf
@@ -168,9 +167,8 @@ RobotoCondensed-BoldItalic.ttf
 RobotoCondensed-Italic.ttf
 RobotoCondensed-Light.ttf
 RobotoCondensed-LightItalic.ttf
-RobotoCondensed-Medium.ttf
-RobotoCondensed-MediumItalic.ttf
 RobotoCondensed-Regular.ttf
 fonts.xml
 NanumGothic.ttf
 DroidSansFallback.ttf
+NotoSansCJK-Regular.ttc

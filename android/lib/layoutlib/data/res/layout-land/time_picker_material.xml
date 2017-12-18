@@ -20,21 +20,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/time_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="center"
         android:paddingStart="?attr/dialogPreferredPadding"
         android:paddingEnd="?attr/dialogPreferredPadding">
 
         <LinearLayout
             android:id="@+id/time_layout"
-            android:layoutDirection="ltr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:paddingTop="@dimen/timepicker_radial_picker_top_margin"
             android:orientation="horizontal">
 
@@ -114,7 +112,7 @@
                 android:includeFontPadding="false"
                 android:button="@null" />
         </RadioGroup>
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:visibility="gone"

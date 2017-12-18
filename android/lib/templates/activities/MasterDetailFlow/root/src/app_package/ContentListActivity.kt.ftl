@@ -12,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 <#if parentActivityClass?has_content>
+<#if minApiLevel lt 16>
 import android.support.v4.app.NavUtils
+</#if>
 import ${actionBarClassFqcn}
 import android.view.MenuItem
 </#if>
@@ -20,9 +22,10 @@ import android.view.MenuItem
 import ${applicationPackage}.R
 </#if>
 
-import ${kotlinEscapedPackageName}.dummy.DummyContent
+import ${packageName}.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_${item_list_layout}.*
 import kotlinx.android.synthetic.main.${item_list_content_layout}.view.*
+
 import kotlinx.android.synthetic.main.${collection_name}.*
 
 /**
@@ -39,7 +42,7 @@ class ${CollectionName}Activity : ${superClass}() {
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
-    private var twoPane: Boolean = false
+    private var mTwoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,7 @@ class ${CollectionName}Activity : ${superClass}() {
 </#if>
 <#if parentActivityClass != "">
         // Show the Up button in the action bar.
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
 </#if>
 
         if (${detail_name}_container != null) {
@@ -66,50 +69,51 @@ class ${CollectionName}Activity : ${superClass}() {
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
-            twoPane = true
+            mTwoPane = true
         }
 
         setupRecyclerView(${collection_name})
     }
 <#if parentActivityClass != "">
 
-    override fun onOptionsItemSelected(item: MenuItem) =
-            when (item.itemId) {
-                android.R.id.home -> {
-                    // This ID represents the Home or Up button. In the case of this
-                    // activity, the Up button is shown. Use NavUtils to allow users
-                    // to navigate up one level in the application structure. For
-                    // more details, see the Navigation pattern on Android Design:
-                    //
-                    // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-                    NavUtils.navigateUpFromSameTask(this)
-                    true
-                }
-                else -> super.onOptionsItemSelected(item)
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        int id = item.getItemId()
+        if (id == android.R.id.home) {
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            ${(minApiLevel lt 16)?string('NavUtils.','')}navigateUpFromSameTask(this);
+            return true
+        }
+        return super.onOptionsItemSelected(item);
+    }
 </#if>
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: ${CollectionName}Activity,
-                                        private val values: List<DummyContent.DummyItem>,
-                                        private val twoPane: Boolean) :
+    class SimpleItemRecyclerViewAdapter(private val mParentActivity: ${CollectionName}Activity,
+                                        private val mValues: List<DummyContent.DummyItem>,
+                                        private val mTwoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
-        private val onClickListener: View.OnClickListener
+        private val mOnClickListener: View.OnClickListener
 
         init {
-            onClickListener = View.OnClickListener { v ->
+            mOnClickListener = View.OnClickListener { v ->
                 val item = v.tag as DummyContent.DummyItem
-                if (twoPane) {
+                if (mTwoPane) {
                     val fragment = ${DetailName}Fragment().apply {
                         arguments = Bundle().apply {
                             putString(${DetailName}Fragment.ARG_ITEM_ID, item.id)
                         }
                     }
-                    parentActivity.supportFragmentManager
+                    mParentActivity.supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.${detail_name}_container, fragment)
                             .commit()
@@ -129,21 +133,23 @@ class ${CollectionName}Activity : ${superClass}() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            val item = mValues[position]
+            holder.mIdView.text = item.id
+            holder.mContentView.text = item.content
 
             with(holder.itemView) {
                 tag = item
-                setOnClickListener(onClickListener)
+                setOnClickListener(mOnClickListener)
             }
         }
 
-        override fun getItemCount() = values.size
+        override fun getItemCount(): Int {
+            return mValues.size
+        }
 
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
+        inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+            val mIdView: TextView = mView.id_text
+            val mContentView: TextView = mView.content
         }
     }
 }

@@ -24,8 +24,7 @@ public class PlaybackActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if( savedInstanceState == null ){
-            getSupportFragmentManager()
-                    .beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, new PlaybackVideoFragment())
                     .commit();
         }

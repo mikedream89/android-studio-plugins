@@ -9,10 +9,10 @@ parts {
   }
   portrait {
     background {
-      image port_back.webp
+      image port_back.png
     }
     onion {
-      image port_fore.webp
+      image port_fore.png
     }
     buttons {
       back {
@@ -54,10 +54,10 @@ parts {
   }
   landscape {
     background {
-      image land_back.webp
+      image land_back.png
     }
     onion {
-      image land_fore.webp
+      image land_fore.png
     }
     buttons {
       back {

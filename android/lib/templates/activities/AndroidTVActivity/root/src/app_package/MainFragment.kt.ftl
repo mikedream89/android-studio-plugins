@@ -55,6 +55,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 class ${mainFragment} : BrowseFragment() {
 
     private val mHandler = Handler()
+    private lateinit var mRowsAdapter: ArrayObjectAdapter
     private lateinit var mBackgroundManager: BackgroundManager
     private var mDefaultBackground: Drawable? = null
     private lateinit var mMetrics: DisplayMetrics
@@ -104,7 +105,7 @@ class ${mainFragment} : BrowseFragment() {
     private fun loadRows() {
         val list = MovieList.list
 
-        val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
+        mRowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         val cardPresenter = CardPresenter()
 
         for (i in 0 until NUM_ROWS) {
@@ -120,7 +121,7 @@ class ${mainFragment} : BrowseFragment() {
             <#else>
                 val header = HeaderItem(i.toLong(), MovieList.MOVIE_CATEGORY[i], null)
             </#if>
-            rowsAdapter.add(ListRow(header, listRowAdapter))
+            mRowsAdapter.add(ListRow(header, listRowAdapter))
         }
 
         <#if buildApi gte 22>
@@ -134,9 +135,9 @@ class ${mainFragment} : BrowseFragment() {
         gridRowAdapter.add(resources.getString(R.string.grid_view))
         gridRowAdapter.add(getString(R.string.error_fragment))
         gridRowAdapter.add(resources.getString(R.string.personal_settings))
-        rowsAdapter.add(ListRow(gridHeader, gridRowAdapter))
+        mRowsAdapter.add(ListRow(gridHeader, gridRowAdapter))
 
-        adapter = rowsAdapter
+        adapter = mRowsAdapter
     }
 
     private fun setupEventListeners() {
@@ -150,11 +151,8 @@ class ${mainFragment} : BrowseFragment() {
     }
 
     private inner class ItemViewClickedListener : OnItemViewClickedListener {
-        override fun onItemClicked(
-                itemViewHolder: Presenter.ViewHolder,
-                item: Any,
-                rowViewHolder: RowPresenter.ViewHolder,
-                row: Row) {
+        override fun onItemClicked(itemViewHolder: Presenter.ViewHolder, item: Any,
+                                   rowViewHolder: RowPresenter.ViewHolder, row: Row) {
 
             if (item is Movie) {
                 Log.d(TAG, "Item: " + item.toString())
@@ -162,10 +160,9 @@ class ${mainFragment} : BrowseFragment() {
                 intent.putExtra(${detailsActivity}.MOVIE, item)
 
                 val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                                activity,
-                                                (itemViewHolder.view as ImageCardView).mainImageView,
-                                                ${detailsActivity}.SHARED_ELEMENT_NAME)
-                                        .toBundle()
+                        activity,
+                        (itemViewHolder.view as ImageCardView).mainImageView,
+                        ${detailsActivity}.SHARED_ELEMENT_NAME).toBundle()
                 activity.startActivity(intent, bundle)
             } else if (item is String) {
                 if (item.contains(getString(R.string.error_fragment))) {

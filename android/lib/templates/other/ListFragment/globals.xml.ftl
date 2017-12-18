@@ -6,5 +6,4 @@
     <global id="resOut" value="${resDir}" />
     <global id="srcOut" value="${srcDir}/${slashedPackageName(packageName)}" />
     <global id="collection_name" value="${extractLetters(objectKind?lower_case)}" />
-    <#include "root://activities/common/kotlin_globals.xml.ftl" />
 </globals>

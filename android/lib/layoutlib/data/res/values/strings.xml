@@ -20,13 +20,63 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Suffix added to a number to signify size in bytes. -->
     <string name="byteShort">B</string>
+    <!-- Suffix added to a number to signify size in kilobytes (1000 bytes). -->
+    <string name="kilobyteShort">KB</string>
+    <!-- Suffix added to a number to signify size in megabytes. -->
+    <string name="megabyteShort">MB</string>
+    <!-- Suffix added to a number to signify size in gigabytes. -->
+    <string name="gigabyteShort">GB</string>
+    <!-- Suffix added to a number to signify size in terabytes. -->
+    <string name="terabyteShort">TB</string>
     <!-- Suffix added to a number to signify size in petabytes. -->
     <string name="petabyteShort">PB</string>
-    <!-- Format string used to add a suffix like "B" or "PB" to a number
-         to display a size in bytes or petabytes.
-         Some languages may want to remove the space between the placeholders
-         or replace it with a non-breaking space. -->
-    <string name="fileSizeSuffix"><xliff:g id="number" example="123">%1$s</xliff:g> <xliff:g id="unit" example="B">%2$s</xliff:g></string>
+    <!-- Format string used to add a suffix like "kB" or "MB" to a number
+         to display a size in kilobytes, megabytes, or other size units.
+         Some languages (like French) will want to add a space between
+         the placeholders. -->
+    <string name="fileSizeSuffix"><xliff:g id="number" example="123">%1$s</xliff:g> <xliff:g id="unit" example="MB">%2$s</xliff:g></string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration in days -->
+    <string name="durationDays"><xliff:g id="days">%1$d</xliff:g> days</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one day with hours -->
+    <string name="durationDayHours"><xliff:g id="days">%1$d</xliff:g> day
+            <xliff:g id="hours">%2$d</xliff:g> hrs</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one day with one hours -->
+    <string name="durationDayHour"><xliff:g id="days">%1$d</xliff:g> day
+            <xliff:g id="hours">%2$d</xliff:g> hr</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration in hours -->
+    <string name="durationHours"><xliff:g id="hours">%1$d</xliff:g> hrs</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one hour with minutes -->
+    <string name="durationHourMinutes"><xliff:g id="hours">%1$d</xliff:g> hr
+            <xliff:g id="minutes">%2$d</xliff:g> mins</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one hour with one minute -->
+    <string name="durationHourMinute"><xliff:g id="hours">%1$d</xliff:g> hr
+            <xliff:g id="minutes">%2$d</xliff:g> min</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration in minutes -->
+    <string name="durationMinutes"><xliff:g id="minutes">%1$d</xliff:g> mins</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one minute -->
+    <string name="durationMinute"><xliff:g id="minutes">%1$d</xliff:g> min</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one minute with seconds -->
+    <string name="durationMinuteSeconds"><xliff:g id="minutes">%1$d</xliff:g> min
+            <xliff:g id="seconds">%2$d</xliff:g> secs</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one minute with one second -->
+    <string name="durationMinuteSecond"><xliff:g id="minutes">%1$d</xliff:g> min
+            <xliff:g id="seconds">%2$d</xliff:g> sec</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration in seconds -->
+    <string name="durationSeconds"><xliff:g id="seconds">%1$d</xliff:g> secs</string>
+
+    <!-- [CHAR_LIMIT=10] Suffix added to signify duration of one second -->
+    <string name="durationSecond"><xliff:g id="seconds">%1$d</xliff:g> sec</string>
 
     <!-- Used in Contacts for a field that has no label and in Note Pad
          for a note with no name. -->
@@ -139,39 +189,26 @@
 
     <!-- Notification title to tell the user that data service is blocked by access control. -->
     <string name="RestrictedOnDataTitle">No data service</string>
-    <!-- Notification title to tell the user that emergency calling is blocked by access control. -->
-    <string name="RestrictedOnEmergencyTitle">No emergency calling</string>
+    <!-- Notification title to tell the user that emergency service is blocked by access control. -->
+    <string name="RestrictedOnEmergencyTitle">No emergency service</string>
     <!-- Notification title to tell the user that normal service is blocked by access control. -->
     <string name="RestrictedOnNormalTitle">No voice service</string>
     <!-- Notification title to tell the user that all emergency and normal voice services are blocked by access control. -->
     <string name="RestrictedOnAllVoiceTitle">No voice/emergency service</string>
 
-    <!-- Notification content to tell the user that voice/data/emergency service is blocked by access control. -->
-    <string name="RestrictedStateContent">Temporarily not offered by the mobile network at your location</string>
+    <!-- Notification content to tell the user that data service is blocked by access control. -->
+    <string name="RestrictedOnDataContent">Your carrier has temporarily suspended data service at this location</string>
+    <!-- Notification content to tell the user that emergency service is blocked by access control. -->
+    <string name="RestrictedOnEmergencyContent">Your carrier has temporarily suspended emergency calls at this location</string>
+    <!-- Notification content to tell the user that normal service is blocked by access control. -->
+    <string name="RestrictedOnNormalContent">Your carrier has temporarily suspended voice calls at this location</string>
+    <!-- Notification content to tell the user that all emergency and normal voice services are blocked by access control. -->
+    <string name="RestrictedOnAllVoiceContent">Your carrier has temporarily suspended voice and emergency calls at this location</string>
 
     <!-- Displayed to tell the user that they should switch their network preference. -->
     <string name="NetworkPreferenceSwitchTitle">Can\u2019t reach network</string>
     <!-- Displayed to tell the user that they should switch their network preference. -->
-    <string name="NetworkPreferenceSwitchSummary">To improve reception, try changing the type selected at Settings &gt; Network &amp; Internet &gt; Mobile networks &gt; Preferred network type."</string>
-    <!-- Displayed to tell the user that emergency calls might not be available. -->
-    <string name="EmergencyCallWarningTitle">Wi\u2011Fi calling is active</string>
-    <!-- Displayed to tell the user that emergency calls might not be available. -->
-    <string name="EmergencyCallWarningSummary">Emergency calls require a mobile network.</string>
-
-    <!-- Telephony notification channel name for a channel containing network alert notifications. -->
-    <string name="notification_channel_network_alert">Alerts</string>
-    <!-- Telephony notification channel name for a channel containing call forwarding notifications. -->
-    <string name="notification_channel_call_forward">Call forwarding</string>
-    <!-- Telephony notification channel name for a channel containing emergency callback mode notifications. -->
-    <string name="notification_channel_emergency_callback">Emergency callback mode</string>
-    <!-- Telephony notification channel name for a channel containing mobile data status notifications. -->
-    <string name="notification_channel_mobile_data_status">Mobile data status</string>
-    <!-- Telephony notification channel name for a channel containing sms notifications. -->
-    <string name="notification_channel_sms">SMS messages</string>
-    <!-- Telephony notification channel name for a channel containing voice mail notifications. -->
-    <string name="notification_channel_voice_mail">Voicemail messages</string>
-    <!-- Telephony notification channel name for a channel containing wifi calling status notifications. -->
-    <string name="notification_channel_wfc">Wi-Fi calling</string>
+    <string name="NetworkPreferenceSwitchSummary">To improve reception, try changing the type selected at System &gt; Network &amp; Internet &gt; Mobile networks &gt; Preferred network type."</string>
 
     <!-- Displayed to tell the user that peer changed TTY mode -->
     <string name="peerTtyModeFull">Peer requested TTY Mode FULL</string>
@@ -218,11 +255,11 @@
     <string name="wfcRegErrorTitle">Wi-Fi Calling</string>
     <!-- WFC Operator Error Messages showed as alerts -->
     <string-array name="wfcOperatorErrorAlertMessages">
-        <item>To make calls and send messages over Wi-Fi, first ask your carrier to set up this service. Then turn on Wi-Fi calling again from Settings. (Error code: <xliff:g id="code" example="REG09 - No 911 Address">%1$s</xliff:g>)</item>
+        <item>To make calls and send messages over Wi-Fi, first ask your carrier to set up this service. Then turn on Wi-Fi calling again from Settings.</item>
     </string-array>
     <!-- WFC Operator Error Messages showed as notifications -->
     <string-array name="wfcOperatorErrorNotificationMessages">
-        <item>Register with your carrier (Error code: <xliff:g id="code" example="REG09 - No 911 Address">%1$s</xliff:g>)</item>
+        <item>Register with your carrier</item>
     </string-array>
     <!-- Template for showing mobile network operator name while WFC is active -->
     <string-array name="wfcSpnFormats">
@@ -543,7 +580,10 @@
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>
 
     <!-- Text shown in place of notification contents when the notification is hidden on a secure lockscreen -->
-    <string name="notification_hidden_text">New notification</string>
+    <string name="notification_hidden_text">Contents hidden</string>
+
+    <!-- Text shown in place of notification contents when the notification is hidden by policy on a secure lockscreen -->
+    <string name="notification_hidden_by_policy_text">Contents hidden by policy</string>
 
     <!-- Text shown when viewing channel settings for notifications related to the virtual keyboard -->
     <string name="notification_channel_virtual_keyboard">Virtual keyboard</string>
@@ -572,9 +612,6 @@
     <!-- Text shown when viewing channel settings for notifications related to network alerts -->
     <string name="notification_channel_network_alerts">Network alerts</string>
 
-    <!-- Text shown when viewing the channel settings for notification about open nearby wireless networks. -->
-    <string name="notification_channel_network_available">Network available</string>
-
     <!-- Text shown when viewing channel settings for notifications related to vpn status -->
     <string name="notification_channel_vpn">VPN status</string>
 
@@ -589,35 +626,6 @@
 
     <!-- Text shown when viewing channel settings for notifications related to a usb connection -->
     <string name="notification_channel_usb">USB connection</string>
-
-    <!-- This is the label for the notification channel settings that controls the behavior
-        of the notification about applications that are running in the background (that is,
-        perhaps confusingly, running foreground services but not the foreground UI on the screen).
-        [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=6665375982962336520] -->
-    <string name="notification_channel_foreground_service">Apps consuming battery</string>
-
-    <!-- Label for foreground service notification when one app is running.
-    [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=6826789589341671842] -->
-    <string name="foreground_service_app_in_background"><xliff:g id="app_name">%1$s</xliff:g> is
-        using battery</string>
-
-    <!-- Label for foreground service notification when multiple apps are running.
-        [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=7150914856893450380] -->
-    <string name="foreground_service_apps_in_background"><xliff:g id="number">%1$d</xliff:g> apps
-        are using battery</string>
-
-    <!-- Content for foreground service notification when one app is running.
-        [CHAR LIMIT=NONE] -->
-    <string name="foreground_service_tap_for_details">Tap for details on battery and
-        data usage</string>
-
-    <!-- Separator for foreground service notification content listing all apps when there
-        are multiple apps running.  The left and right side may both already be compound
-        (constructed using this separator).  Should be kept as short as possible, this is
-        for summary text in the notification where there is not a lot of space.
-        [CHAR LIMIT=NONE] -->
-    <string name="foreground_service_multiple_separator"><xliff:g id="left_side">%1$s</xliff:g>,
-        <xliff:g id="right_side">%2$s</xliff:g></string>
 
     <!-- Displayed to the user to tell them that they have started up the phone in "safe mode" -->
     <string name="safeMode">Safe mode</string>
@@ -687,6 +695,13 @@
     <!-- Description for the capability of an accessibility service to request touch exploration. -->
     <string name="capability_desc_canRequestTouchExploration">Tapped items will be spoken aloud
         and the screen can be explored using gestures.</string>
+
+    <!-- Title for the capability of an accessibility service to request enhanced web accessibility. -->
+    <string name="capability_title_canRequestEnhancedWebAccessibility">Turn on enhanced web
+        accessibility</string>
+    <!-- Description for the capability of an accessibility service to request enhanced web accessibility. -->
+    <string name="capability_desc_canRequestEnhancedWebAccessibility">Scripts may be installed to
+        make app content more accessible.</string>
 
     <!-- Title for the capability of an accessibility service to request to filter key events. -->
     <string name="capability_title_canRequestFilterKeyEvents">Observe text you type</string>
@@ -1279,8 +1294,6 @@
     <string name="fingerprint_error_canceled">Fingerprint operation canceled.</string>
     <!-- Generic error message shown when the fingerprint operation fails because too many attempts have been made. -->
     <string name="fingerprint_error_lockout">Too many attempts. Try again later.</string>
-    <!-- Generic error message shown when the fingerprint operation fails because strong authentication is required -->
-    <string name="fingerprint_error_lockout_permanent">Too many attempts. Fingerprint sensor disabled.</string>
     <!-- Generic error message shown when the fingerprint hardware can't recognize the fingerprint -->
     <string name="fingerprint_error_unable_to_process">Try again.</string>
 
@@ -2650,10 +2663,10 @@
     <string name="dial">Phone</string>
 
     <!-- Label for item in the text selection menu to trigger a Map app [CHAR LIMIT=20] -->
-    <string name="map">Maps</string>
+    <string name="map">Map</string>
 
     <!-- Label for item in the text selection menu to trigger a Browser app [CHAR LIMIT=20] -->
-    <string name="browse">Browser</string>
+    <string name="browse">Browse</string>
 
     <!-- If the device is getting low on internal storage, a notification is shown to the user.  This is the title of that notification. -->
     <string name="low_internal_storage_view_title">Storage space running out</string>
@@ -2679,8 +2692,6 @@
     <string name="yes">OK</string>
     <!-- Preference framework strings. -->
     <string name="no">Cancel</string>
-    <!-- Preference framework strings. -->
-    <string name="close">CLOSE</string>
     <!-- This is the generic "attention" string to be used in attention dialogs.  Typically
          combined with setIconAttribute(android.R.attr.alertDialogIcon)
          (or setIcon(android.R.drawable.ic_dialog_alert) on legacy versions of the platform) -->
@@ -2813,11 +2824,6 @@
     <!-- [CHAR LIMIT=200] Compat mode dialog: hint to re-enable compat mode dialog. -->
     <string name="screen_compat_mode_hint">Re-enable this in System settings &gt; Apps &gt; Downloaded.</string>
 
-    <!-- Text of the alert that is displayed when a top application is killed by lmk. -->
-    <string name="top_app_killed_title">App isn\'t responding</string>
-    <!-- Top app killed by lmk dialog message. -->
-    <string name="top_app_killed_message"><xliff:g id="app_name">%1$s</xliff:g> may be using too much memory.</string>
-
     <!-- [CHAR LIMIT=200] Unsupported display size dialog: message. Refers to "Display size" setting. -->
     <string name="unsupported_display_size_message"><xliff:g id="app_name">%1$s</xliff:g> does not support the current Display size setting and may behave unexpectedly.</string>
     <!-- [CHAR LIMIT=50] Unsupported display size dialog: check box label. -->
@@ -2949,32 +2955,6 @@
     <!-- If there is ever a ringtone set for some setting, but that ringtone can no longer be resolved, t his is shown instead.  For example, if the ringtone was on a SD card and it had been removed, this woudl be shown for ringtones on that SD card. -->
     <string name="ringtone_unknown">Unknown</string>
 
-    <!-- A notification is shown when there are open wireless networks nearby.  This is the notification's title. -->
-    <plurals name="wifi_available">
-        <item quantity="one">Wi-Fi network available</item>
-        <item quantity="other">Wi-Fi networks available</item>
-    </plurals>
-    <!-- A notification is shown when there are open wireless networks nearby.  This is the notification's message. -->
-    <plurals name="wifi_available_detailed">
-        <item quantity="one">Open Wi-Fi network available</item>
-        <item quantity="other">Open Wi-Fi networks available</item>
-    </plurals>
-
-    <!-- Notification title for a nearby open wireless network.-->
-    <string name="wifi_available_title">Connect to open Wi\u2011Fi network</string>
-    <!-- Notification title when the system is connecting to the specified open network. The network name is specified in the notification content. -->
-    <string name="wifi_available_title_connecting">Connecting to open Wi\u2011Fi network</string>
-    <!-- Notification title when the system has connected to the open network. The network name is specified in the notification content. -->
-    <string name="wifi_available_title_connected">Connected to Wi\u2011Fi network</string>
-    <!-- Notification title when the system failed to connect to the specified open network. -->
-    <string name="wifi_available_title_failed_to_connect">Could not connect to Wi\u2011Fi network</string>
-    <!-- Notification content when the system failed to connect to the specified open network. This informs the user that tapping on this notification will open the wifi picker. -->
-    <string name="wifi_available_content_failed_to_connect">Tap to see all networks</string>
-    <!-- Notification action name for connecting to the network specified in the notification body. -->
-    <string name="wifi_available_action_connect">Connect</string>
-    <!-- Notification action name for opening the wifi picker, showing the user all the nearby networks. -->
-    <string name="wifi_available_action_all_networks">All Networks</string>
-
     <!-- A notification is shown when a wifi captive portal network is detected.  This is the notification's title. -->
     <string name="wifi_available_sign_in">Sign in to Wi-Fi network</string>
 
@@ -3018,8 +2998,6 @@
 
     <!-- Do not translate. Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default" translatable="false">AndroidAP</string>
-    <!-- Do not translate. Default access point SSID used for local only hotspot -->
-    <string name="wifi_localhotspot_configure_ssid_default" translatable="false">AndroidShare</string>
 
     <!-- A notification is shown the first time a connection is attempted on an app owned AP -->
     <!-- title for this message -->
@@ -3142,11 +3120,6 @@
     <string name="usb_accessory_notification_title">Connected to a USB accessory</string>
     <!-- See USB_PREFERENCES. This is the message. -->
     <string name="usb_notification_message">Tap for more options.</string>
-    <!-- USB_PREFERENCES: Notification for when a type-c USB audio accessory is attached but not supported.  This is the title -->
-    <string name="usb_unsupported_audio_accessory_title">Analog audio accessory detected</string>
-    <!-- Message of notification shown when a type-c USB audio accessory is attached but not supported. -->
-    <string name="usb_unsupported_audio_accessory_message">The attached device is not compatible with this phone. Tap to learn more.</string>
-
 
     <!-- Title of notification shown when ADB is actively connected to the phone. -->
     <string name="adb_active_notification_title">USB debugging connected</string>
@@ -3194,15 +3167,12 @@
 
     <!-- Alert windows notification strings -->
     <skip />
-    <!-- Name of notification channel group the system post notification to inform the use about apps
-         that are drawing ui on-top of other apps (alert-windows) [CHAR LIMIT=NONE] -->
-    <string name="alert_windows_notification_channel_group_name">Display over other apps</string>
     <!-- Name of notification channel the system post notification to inform the use about apps
          that are drawing ui on-top of other apps (alert-windows) [CHAR LIMIT=NONE] -->
     <string name="alert_windows_notification_channel_name"><xliff:g id="name" example="Google Maps">%s</xliff:g> displaying over other apps</string>
     <!-- Notification title when an application is displaying ui on-top of other apps
          [CHAR LIMIT=30] -->
-    <string name="alert_windows_notification_title"><xliff:g id="name" example="Google Maps">%s</xliff:g> is displaying over other apps</string>
+    <string name="alert_windows_notification_title"><xliff:g id="name" example="Google Maps">%s</xliff:g> is displaying over other apps.</string>
     <!-- Notification body when an application is displaying ui on-top of other apps
          [CHAR LIMIT=NONE] -->
     <string name="alert_windows_notification_message">If you don’t want <xliff:g id="name" example="Google Maps">%s</xliff:g> to use this feature, tap to open settings and turn it off.</string>
@@ -3656,7 +3626,7 @@
     <string name="data_usage_3g_limit_title">2G-3G data limit reached</string>
     <!-- Notification title when 4G data usage has exceeded limit threshold, and has been disabled. [CHAR LIMIT=32] -->
     <string name="data_usage_4g_limit_title">4G data limit reached</string>
-    <!-- Notification title when mobile data usage has exceeded limit threshold, and has been disabled. [CHAR LIMIT=50] -->
+    <!-- Notification title when mobile data usage has exceeded limit threshold, and has been disabled. [CHAR LIMIT=32] -->
     <string name="data_usage_mobile_limit_title">Mobile data limit reached</string>
     <!-- Notification title when Wi-Fi data usage has exceeded limit threshold, and has been disabled. [CHAR LIMIT=32] -->
     <string name="data_usage_wifi_limit_title">Wi-Fi data limit reached</string>
@@ -4474,7 +4444,7 @@
         <item quantity="other"><xliff:g id="count" example="3">%1$d</xliff:g> selected</item>
     </plurals>
 
-    <string name="default_notification_channel_label">Uncategorized</string>
+    <string name="default_notification_channel_label">Miscellaneous</string>
 
     <string name="importance_from_user">You set the importance of these notifications.</string>
     <string name="importance_from_person">This is important because of the people involved.</string>
@@ -4547,10 +4517,22 @@
     <!-- The representation of a time duration when negative. An example is -1:14. This can be used with a countdown timer for example.-->
     <string name="negative_duration">\u2212<xliff:g id="time" example="1:14">%1$s</xliff:g></string>
 
+    <!-- Title of notification to start a new demo session when device is in retail mode [CHAR LIMIT=NONE] -->
+    <string name="reset_retail_demo_mode_title">Reset device?</string>
+    <!-- Text of notification to start a new demo session when device is in retail mode [CHAR LIMIT=NONE] -->
+    <string name="reset_retail_demo_mode_text">Tap to reset device</string>
     <!-- Text of dialog shown when starting a demo user for the first time [CHAR LIMIT=40] -->
     <string name="demo_starting_message">Starting demo\u2026</string>
     <!-- Text of dialog shown when starting a new demo user in retail demo mode [CHAR LIMIT=40] -->
     <string name="demo_restarting_message">Resetting device\u2026</string>
+    <!-- Title of the dialog shown when user inactivity times out in retail demo mode [CHAR LIMIT=40] -->
+    <string name="demo_user_inactivity_timeout_title">Reset device?</string>
+    <!-- Warning message shown when user inactivity times out in retail demo mode [CHAR LIMIT=none] -->
+    <string name="demo_user_inactivity_timeout_countdown">You\u2019ll lose any changes and the demo will start again in <xliff:g id="timeout" example="9">%1$s</xliff:g> seconds\u2026</string>
+    <!-- Text of button to allow user to abort countdown and continue current session in retail demo mode [CHAR LIMIT=40] -->
+    <string name="demo_user_inactivity_timeout_left_button">Cancel</string>
+    <!-- Text of button to allow user to abort countdown and immediately start another session in retail demo mode [CHAR LIMIT=40] -->
+    <string name="demo_user_inactivity_timeout_right_button">Reset now</string>
 
     <!-- Accessibilty string added to a widget that has been suspended [CHAR LIMIT=20] -->
     <string name="suspended_widget_accessibility">Disabled <xliff:g id="label" example="Calendar">%1$s</xliff:g></string>
@@ -4601,35 +4583,12 @@
     <!-- Accessibility title for the autofill dialog used to select a list of options to autofill an activity. [CHAR LIMIT=NONE] -->
     <string name="autofill_picker_accessibility_title">Autofill options</string>
 
-    <!-- Accessibility title for the autofill dialog used to ask user to save the information on the screen by sending it to an Autofill Service. [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_accessibility_title">Save for Autofill</string>
-
-    <!-- Toast message shown when user manually request autofill but service could not figure out the data that would autofill the screen contents. [CHAR LIMIT=NONE] -->
-    <string name="autofill_error_cannot_autofill">Contents can\u2019t be autofilled</string>
-
-    <!-- Accessibility string to announce there are no autofill suggestions in the autofill picker. [CHAR LIMIT=NONE] -->
-    <string name="autofill_picker_no_suggestions">No autofill suggestions</string>
-
-    <!-- Accessibility string to announce there are some autofill suggestions in the autofill picker. [CHAR LIMIT=NONE] -->
-    <plurals name="autofill_picker_some_suggestions">
-        <item quantity="one">One autofill suggestion</item>
-        <item quantity="other"><xliff:g id="count" example="Two">%1$s</xliff:g> autofill suggestions</item>
-    </plurals>
-
     <!-- Title for the autofill save dialog shown when the the contents of the activity can be saved
          by an autofill service, but the service does not know what the activity represents [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_title">Save to &lt;b><xliff:g id="label" example="MyPass">%1$s</xliff:g>&lt;/b>?</string>
+    <string name="autofill_save_title">Save to <xliff:g id="label" example="MyPass">%1$s</xliff:g>?</string>
     <!-- Title for the autofill save dialog shown when the the contents of the activity can be saved
          by an autofill service, and the service does knows what the activity represents (for example, credit card info) [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_title_with_type">Save <xliff:g id="type" example="Credit Card">%1$s</xliff:g> to &lt;b><xliff:g id="label" example="MyPass">%2$s</xliff:g>&lt;/b>?</string>
-    <!-- Title for the autofill save dialog shown when the the contents of the activity can be saved
-         by an autofill service, and the service does knows what the activity represents, and it represents 2 types of
-         data (for example, password and credit card info) [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_title_with_2types">Save <xliff:g id="type" example="Password">%1$s</xliff:g> and <xliff:g id="type" example="Credit Card">%2$s</xliff:g> to &lt;b><xliff:g id="label" example="MyPass">%3$s</xliff:g>&lt;/b>?</string>
-    <!-- Title for the autofill save dialog shown when the the contents of the activity can be saved
-         by an autofill service, and the service does knows what the activity represents, and it represents 3 types of
-         data (for example, username, password and credit card info) [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_title_with_3types">Save <xliff:g id="type" example="Username">%1$s</xliff:g>, <xliff:g id="type" example="Password">%2$s</xliff:g>, and <xliff:g id="type" example="Credit Card">%3$s</xliff:g> to &lt;b><xliff:g id="label" example="MyPass">%4$s</xliff:g>&lt;/b>?</string>
+    <string name="autofill_save_title_with_type">Save <xliff:g id="type" example="Credit Card">%1$s</xliff:g> to <xliff:g id="label" example="MyPass">%2$s</xliff:g>?</string>
     <!-- Label for the autofill save button [CHAR LIMIT=NONE] -->
     <string name="autofill_save_yes">Save</string>
     <!-- Label for the autofill cancel button [CHAR LIMIT=NONE] -->
@@ -4641,10 +4600,6 @@
     <string name="autofill_save_type_address">address</string>
     <!-- Label for the type of data being saved for autofill when it represents a credit card [CHAR LIMIT=NONE] -->
     <string name="autofill_save_type_credit_card">credit card</string>
-    <!-- Label for the type of data being saved for autofill when it represents an username [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_type_username">username</string>
-    <!-- Label for the type of data being saved for autofill when it represents an email address [CHAR LIMIT=NONE] -->
-    <string name="autofill_save_type_email_address">email address</string>
 
     <!-- Primary ETWS (Earthquake and Tsunami Warning System) default message for earthquake -->
     <string name="etws_primary_default_message_earthquake">Stay calm and seek shelter nearby.</string>
@@ -4658,9 +4613,6 @@
     <!-- Primary ETWS (Earthquake and Tsunami Warning System) default message for test -->
     <string name="etws_primary_default_message_test">Emergency messages test</string>
 
-    <!-- Content description for the reply button in the notification area [CHAR LIMIT=NONE]-->
-    <string name="notification_reply_button_accessibility">Reply</string>
-
     <!-- Primary ETWS (Earthquake and Tsunami Warning System) default message for others -->
     <string name="etws_primary_default_message_others"></string>
 
@@ -4669,7 +4621,4 @@
     <string name="mmcc_imsi_unknown_in_hlr">SIM not provisioned</string>
     <string name="mmcc_illegal_ms">SIM not allowed</string>
     <string name="mmcc_illegal_me">Phone not allowed</string>
-
-    <!-- Popup window default title to be read by a screen reader-->
-    <string name="popup_window_default_title">Popup Window</string>
 </resources>

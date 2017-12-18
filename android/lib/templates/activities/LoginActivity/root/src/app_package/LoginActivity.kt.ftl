@@ -41,7 +41,7 @@ class ${activityClass} : ${superClass}(), LoaderCallbacks<Cursor> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.${layoutName})
+        setContentView(R.layout.activity_login)
 <#if parentActivityClass?has_content>
         setupActionBar()
 </#if>

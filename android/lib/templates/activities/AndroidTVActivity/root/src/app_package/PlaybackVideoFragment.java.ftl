@@ -31,6 +31,7 @@ import android.support.v17.leanback.media.PlaybackGlue;
 
 /** Handles video playback with media controls. */
 public class PlaybackVideoFragment extends VideoSupportFragment {
+    private static final String TAG = "PlaybackVideoFragment";
 
 <#if buildApi gte 27>
     private PlaybackTransportControlGlue<MediaPlayerAdapter> mTransportControlGlue;
@@ -42,8 +43,8 @@ public class PlaybackVideoFragment extends VideoSupportFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Movie movie =
-                (Movie) getActivity().getIntent().getSerializableExtra(DetailsActivity.MOVIE);
+        final Movie movie = (Movie) getActivity()
+                .getIntent().getSerializableExtra(DetailsActivity.MOVIE);
 
         VideoSupportFragmentGlueHost glueHost =
                 new VideoSupportFragmentGlueHost(PlaybackVideoFragment.this);

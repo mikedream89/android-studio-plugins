@@ -40,14 +40,15 @@
             to="${escapeXmlAttribute(resOut)}/drawable-nodpi/preview_digital_circular.png" />
 </#if>
 
+<#assign ext=generateKotlin?string('kt', 'java')>
 <#if style == "analog">
-    <instantiate from="root/src/app_package/MyAnalogWatchFaceService.${ktOrJavaExt}.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ktOrJavaExt}" />
-    <open file="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ktOrJavaExt}" />
+    <instantiate from="root/src/app_package/MyAnalogWatchFaceService.${ext}.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ext}" />
+    <open file="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ext}" />
 <#elseif style == "digital">
-    <instantiate from="root/src/app_package/MyDigitalWatchFaceService.${ktOrJavaExt}.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ktOrJavaExt}" />
-    <open file="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ktOrJavaExt}" />
+    <instantiate from="root/src/app_package/MyDigitalWatchFaceService.${ext}.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ext}" />
+    <open file="${escapeXmlAttribute(srcOut)}/${serviceClass}.${ext}" />
 </#if>
 
 </recipe>

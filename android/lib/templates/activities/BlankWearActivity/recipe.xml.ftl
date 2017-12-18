@@ -31,9 +31,15 @@
             to="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />
 </#if>
 
-    <instantiate from="root/src/app_package/BlankActivity.${ktOrJavaExt}.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/${activityClass}.${ktOrJavaExt}" />
-    <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.${ktOrJavaExt}" />
+<#if generateKotlin>
+    <instantiate from="root/src/app_package/BlankActivity.kt.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${activityClass}.kt" />
+    <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.kt" />
+<#else>
+    <instantiate from="root/src/app_package/BlankActivity.java.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/${activityClass}.java" />
+    <open file="${escapeXmlAttribute(srcOut)}/${activityClass}.java" />
+</#if>
 
     <open file="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />
 </recipe>

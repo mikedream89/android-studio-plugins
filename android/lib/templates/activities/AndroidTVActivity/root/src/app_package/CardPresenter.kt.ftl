@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ${escapeKotlinIdentifiers(packageName)}
+package ${escapeKotlinIdentifiers(packageName)};
 
 import android.graphics.drawable.Drawable
 import android.support.v17.leanback.widget.ImageCardView
@@ -37,7 +37,8 @@ class CardPresenter : Presenter() {
         Log.d(TAG, "onCreateViewHolder")
 
         sDefaultBackgroundColor = ContextCompat.getColor(parent.context, R.color.default_background)
-        sSelectedBackgroundColor = ContextCompat.getColor(parent.context, R.color.selected_background)
+        sSelectedBackgroundColor =
+                ContextCompat.getColor(parent.context, R.color.selected_background)
         mDefaultCardImage = ContextCompat.getDrawable(parent.context, R.drawable.movie)
 
         val cardView = object : ImageCardView(parent.context) {
